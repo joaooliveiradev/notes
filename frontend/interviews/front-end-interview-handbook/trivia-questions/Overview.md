@@ -50,7 +50,7 @@ Promises is an object that represents an eventual completed or failure asynchron
 
 Promise has three states: pending, fullfilled(completed succefully) and reject(failure).
 
-You can pass some callbacks to the promises with the methods .then, .catch. The .then is executed when the promise is fullfiled, .catch is executed when the promise is reject.
+You can pass some callbacks to the promises with the methods `.then`, `.catch`. The `.then` is executed when the promise is fullfiled, `.catch` is executed when the promise is reject.
 
 Promises are mostly used when you want handle with asynchronous operations like fetch calls or reading a huge file and you do not want to block the javascript of reading other lines.
 
@@ -58,8 +58,22 @@ Promises are mostly used when you want handle with asynchronous operations like 
 
 Callbacks are not asynchronous by nature, but can used for handle in asynchronous operations, we can receives callback from arguments, return from a function to execute after some asynchronous operation, things like that. Promises otherwise is an object that represents an eventual completion of an asynchronous operation, it allows you o register callbacks for when the promise is resolved or rejected and it returns a value once the operation completes successfully.
 
-One of the main differences between promises and callback is that promises has more powerful and methods to handle with errors or the values, you can based on a value, reject a promise and catch in the .catch method
+One of the main differences between promises and callback is that promises has more powerful and methods to handle with errors or the values, you can based on a value, reject a promise and catch in the `.catch` method
 
-Other difference is that you can chain more async operations, in .then method we can trigger another async operation that will return a promise and we can use the .then and the .catch again and will goes until you want to stop.
+Other difference is that you can chain more async operations, in .then method we can trigger another async operation that will return a promise and we can use the `.then` and the `.catch` again and will goes until you want to stop.
 
-## CSS
+#### Explain this in JavaScript.
+
+`this` is an keyword that refers to an object, the object changes dependes where `this` is been called or used.
+
+If you call `this` inside an object x, will refer to that object x.
+
+If you call `this` inside a function, will refer to the global object ( yes, that object that has window and some other things).
+
+If you call `this` inside nothing, just where the regular code is, will refer to the global object.
+
+If you call `this` inside in a event, will refer to that element that receives the event.
+
+If you use function like `apply`, `bind`, or `call` will can "put" the `this` to refeer any object.
+
+Obs: you can't modify the value of this, this is an reserved keyword of the language.
