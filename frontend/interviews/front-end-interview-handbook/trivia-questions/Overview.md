@@ -68,7 +68,7 @@ Other difference is that you can chain more async operations, in .then method we
 
 If you call `this` inside an object x, will refer to that object x.
 
-If you call `this` inside a function, will refer to the global object ( yes, that object that has window and some other things).
+If you call `this` inside a function, the this you refer the function object, but needed to be a named regular function. 
 
 If you call `this` inside nothing, just where the regular code is, will refer to the global object.
 
