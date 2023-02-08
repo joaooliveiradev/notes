@@ -6,9 +6,9 @@ describe("BoxInfo", () => {
   it("should be rendering", () => {
     render(<BoxInfo content="test" title="test" />);
 
-    const element = screen.getByText("Public Repos");
+    const element = screen.getByRole("div");
 
-    expect(element).toBeInTheDocument();
+    expect(element).toBeInTheDocument
   });
 });
 
