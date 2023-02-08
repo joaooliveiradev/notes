@@ -1,17 +1,28 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BoxInfo } from "./BoxInfo";
+import exp from "constants";
 
-describe("BoxInfo", () => {
-  it("should be rendering", () => {
-    render(<BoxInfo content="test" title="test" />);
+const props = {
+  content: "Box Content",
+  title: "Box Title",
+};
 
-    const element = screen.getByRole("div");
-
-    expect(element).toBeInTheDocument
+describe("<BoxInfo />", () => {
+  it("should be rendering the title and the content of the <BoxInfo /> component", () => {
+    render(<BoxInfo {...props} />);
+    const title = screen.getByText(/box title/i);
+    const content = screen.getByText(/box content/i);
+    expect(title).toBeInTheDocument();
+    expect(content).toBeInTheDocument();
   });
-});
 
-test("two plus two is four", () => {
-  expect(2 + 2).toBe(4);
+  it("should be title and content rendering the text correctly", () => {
+    render(<BoxInfo {...props} />);
+    const title = screen.getByText(/box title/i);
+    const content = screen.getByText(/box content/i);
+
+    expect(title).toHaveTextContent("Box Title");
+    expect(content).toHaveTextContent("Box Content");
+  });
 });
