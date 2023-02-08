@@ -1,16 +1,16 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BoxInfo } from "./BoxInfo";
-import exp from "constants";
 
 const props = {
   content: "Box Content",
   title: "Box Title",
 };
 
+const renderSetup = () => render(<BoxInfo {...props} />);
+
 describe("<BoxInfo />", () => {
   it("should be rendering the title and the content of the <BoxInfo /> component", () => {
-    render(<BoxInfo {...props} />);
+    renderSetup();
     const title = screen.getByText(/box title/i);
     const content = screen.getByText(/box content/i);
     expect(title).toBeInTheDocument();
@@ -18,7 +18,7 @@ describe("<BoxInfo />", () => {
   });
 
   it("should be title and content rendering the text correctly", () => {
-    render(<BoxInfo {...props} />);
+    renderSetup();
     const title = screen.getByText(/box title/i);
     const content = screen.getByText(/box content/i);
 
