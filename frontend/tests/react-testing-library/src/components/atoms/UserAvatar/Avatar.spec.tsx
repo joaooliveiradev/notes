@@ -19,7 +19,6 @@ describe("<UserAvatar />", () => {
     expect(elementWrapper).toBeInTheDocument();
     expect(listItemElement).toBeInTheDocument();
     expect(avatar).toBeInTheDocument();
-    screen.logTestingPlaygroundURL();
   });
   // The components avatar doesn't render an image in the test's, strange...
   // But if everything works that should, probabily i will made a test to have the alt attribute to increase the accessibility...
@@ -34,5 +33,4 @@ describe("<UserAvatar />", () => {
   //   const avatar = screen.getByRole("img");
   //   expect(avatar).toHaveAttribute('alt')
   // });
-
 });
