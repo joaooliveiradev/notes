@@ -16,6 +16,7 @@ export function Repository({
       p="1rem"
       cursor="pointer"
       onClick={() => window.open(htmlUrl)}
+      data-testid="repositoryWrapper"
     >
       <Text fontSize="xl" fontWeight="bold">
         {name}
