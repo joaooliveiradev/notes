@@ -12,7 +12,7 @@ export type UsersResponse = {
 export type UsersRepositoriesResponse = {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   html_url: string;
   fork: boolean;
   stargazers_count: number;
