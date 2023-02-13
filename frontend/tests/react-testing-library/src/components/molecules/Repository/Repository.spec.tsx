@@ -3,8 +3,6 @@ import { Repository } from "./Repository";
 import userEvent from "@testing-library/user-event";
 import { m } from "framer-motion";
 
-const html_url = "https://github.com/joaooliveiradev";
-
 const mockProps = {
   description: "mockDescription",
   name: "mockName",
