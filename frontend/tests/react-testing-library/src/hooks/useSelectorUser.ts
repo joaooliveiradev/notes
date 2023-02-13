@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/lib/test-utils";
 
 type User = {
   gitUser: {
@@ -7,6 +7,6 @@ type User = {
 };
 
 export function useSelectorUser(): string {
-  const userData = useSelector<User>((state) => state.gitUser.name);
+  const userData = useAppSelector<User>((state) => state.gitUser.name);
   return userData as string;
 }

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/lib/test-utils";
 
 type Page = {
   gitUser: {
@@ -13,7 +13,7 @@ type Response = {
 };
 
 export function useSelectorPage(): Response {
-  const currentPage = useSelector<Page>((state) => state.gitUser) as Response;
+  const currentPage = useAppSelector<Page>((state) => state.gitUser) as Response;
 
   return {
     perPage: currentPage.perPage,
