@@ -16,7 +16,7 @@ export function DevBody({
   public_repos,
 }: UsersResponse): JSX.Element {
   return (
-    <Box background="gray.900" p="1rem">
+    <Box data-testid="devBodyWrapper" background="gray.900" p="1rem">
       <Flex flexDir={["column", "row"]} alignItems={["center", "initial"]}>
         <Box marginRight="1rem">
           <UserAvatar imageSrc={avatar_url} name={name} />
