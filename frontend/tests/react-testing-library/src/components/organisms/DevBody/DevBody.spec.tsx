@@ -19,7 +19,6 @@ const renderSetup = () => render(<DevBody {...mockProps} />);
 describe("<DevBody />", () => {
   it("should be rendering", () => {
     renderSetup();
-    screen.logTestingPlaygroundURL();
     const element = screen.getByTestId("devBodyWrapper");
     expect(element).toBeInTheDocument();
   });
