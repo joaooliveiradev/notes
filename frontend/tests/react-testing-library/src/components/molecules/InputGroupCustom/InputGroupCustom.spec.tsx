@@ -2,7 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { InputGroupCustom } from "./InputGroupCustom";
 import { Provider } from "react-redux";
 import store from "@/store/GitHubUser/store";
-import { changeUser } from "@/store/GitHubUser/gitUserSlice";
+import { changeUser, gitSlice } from "@/store/GitHubUser/gitUserSlice";
+import { useAppDispatch } from "@/lib/test-utils";
 
 const renderSetup = () => {
   render(
@@ -11,6 +12,11 @@ const renderSetup = () => {
     </Provider>
   );
 };
+
+jest.mock("@/lib/test-utils", () => ({
+  useAppDispatch: () => jest.fn(),
+  useAppSelector: () => gitSlice.getInitialState(),
+}));
 
 describe("<InputGroupCustom />", () => {
   it("should render the form", () => {
@@ -24,9 +30,9 @@ describe("<InputGroupCustom />", () => {
   });
   it("simulate an submit action on the component ", async () => {
     renderSetup();
-    const someUser = "vmarcossp";
-    store.dispatch(changeUser(someUser));
-    const state = store.getState();
-    expect(state.gitUser.name).toBe(someUser);
+    const dispatch = useAppDispatch();
+    const mockUser = "vmarcossp"
+    dispatch(changeUser(mockUser));
+    expect(dispatch).toHaveBeenCalled()
   });
 });

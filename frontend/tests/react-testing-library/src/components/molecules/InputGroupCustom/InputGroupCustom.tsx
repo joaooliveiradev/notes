@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import { BaseSyntheticEvent } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useDispatch } from "react-redux";
 
 import { changeUser } from "@/store/GitHubUser/gitUserSlice";
 import {
@@ -12,9 +11,10 @@ import {
 } from "@chakra-ui/react";
 
 import { InputCustom } from "../../atoms";
+import { useAppDispatch } from "@/lib/test-utils";
 
 export function InputGroupCustom(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function handleSubmit(e: BaseSyntheticEvent) {
     e.preventDefault();
