@@ -1,62 +1,31 @@
 import { useSelectorPage } from "@/hooks/useSelectorPage";
 import { useSelectorUser } from "@/hooks/useSelectorUser";
-import { useAppDispatch } from "@/lib/test-utils";
 import { useRepositories } from "@/services/Users/hooks/useData";
 import { changePage, gitSlice } from "@/store/GitHubUser/gitUserSlice";
-import store from "@/store/GitHubUser/store";
-import { screen, render, renderHook, waitFor } from "@testing-library/react";
-import { QueryClient, QueryClientProvider, setLogger } from "react-query";
-import { Provider } from "react-redux";
-import { DevRepositories } from "./DevRepositories";
+import { screen, renderHook, waitFor } from "@testing-library/react";
+import { server, useAppDispatch } from "@/lib/test-utils";
+import { reactQueryWrapper, renderSetup } from "@/lib/testWrappers";
+import { setLogger } from "react-query";
+import { rest } from "msw";
 
-function waitForMs(ms: number) {
-  const end = Date.now() + ms;
-  return waitFor(() => {
-    if (Date.now() < end) {
-      throw new Error("Time not elapsed yet");
-    }
-  });
-}
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-const renderSetup = () =>
-  render(
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <DevRepositories />
-      </Provider>
-    </QueryClientProvider>
-  );
-
-const reactQueryWrapper = ({ children }: { children: React.ReactNode }) => (
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>{children}</Provider>
-  </QueryClientProvider>
-);
-
-jest.mock("@/lib/test-utils", () => ({
-  useAppDispatch: () => jest.fn(),
-  useAppSelector: () => gitSlice.getInitialState(),
-}));
-
-// This is to mute the network errors from test react query functions, i use the fucntion setLogger because the project is using the react-query v3
-// In the react query v4 we can configure the logger directly on the options of the new queryClient({})
-beforeAll(() => {
-  setLogger({
-    log: () => {},
-    warn: () => {},
-    error: () => {},
-  });
+jest.mock("@/lib/test-utils", () => {
+  const actualModule = jest.requireActual("@/lib/test-utils");
+  return {
+    ...actualModule,
+    useAppDispatch: () => jest.fn(),
+    useAppSelector: () => gitSlice.getInitialState(),
+  };
 });
 
 describe("<DevRepositories />", () => {
+  beforeAll(() =>
+    setLogger({
+      log: () => {},
+      warn: () => {},
+      error: () => {},
+    })
+  );
+
   it("should be rendering", async () => {
     renderSetup();
     const gridElement = screen.getByTestId("repos");
@@ -69,21 +38,56 @@ describe("<DevRepositories />", () => {
     dispatch(changePage({ perPage: defaultCount, page: 1 }));
     expect(dispatch).toHaveBeenCalled();
   });
-  it("should show a list of repositories", async () => {
+  it("should loading work properly", async () => {
     renderSetup();
     const spinner = screen.getByTestId("spinner");
+
     const { page, perPage } = useSelectorPage();
     const user = useSelectorUser();
+
     const { result } = renderHook(() => useRepositories(user, page, perPage), {
       wrapper: reactQueryWrapper,
     });
+
     await waitFor(() => {
       expect(result.current.isLoading).toBe(true);
       expect(spinner).toBeInTheDocument();
     });
+
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
       expect(spinner).not.toBeInTheDocument();
+    });
+  });
+
+  it("success call useRepositories hook", async () => {
+    const { page, perPage } = useSelectorPage();
+
+    const user = useSelectorUser();
+
+    const { result } = renderHook(() => useRepositories(user, page, perPage), {
+      wrapper: reactQueryWrapper,
+    });
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isError).toBe(true);
+    });
+  });
+  it("should fail the useRepositores hook", async () => {
+    server.listen();
+
+    const { page, perPage } = useSelectorPage();
+
+    const user = useSelectorUser();
+
+    const { result } = renderHook(() => useRepositories(user, page, perPage), {
+      wrapper: reactQueryWrapper,
+    });
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isError).toBe(true);
     });
   });
 });
