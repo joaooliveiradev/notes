@@ -1,12 +1,14 @@
 import { useAppSelector } from "@/lib/test-utils";
 
 type User = {
-  gitUser: {
+  user: {
     name: string;
+    page: number;
+    perPage: number;
   };
 };
 
-export function useSelectorUser(): string {
-  const userData = useAppSelector<User>((state) => state.gitUser.name);
-  return userData as string;
+export function useSelectorUser() {
+  const userData = useAppSelector<User, User['user']>((state) => state.user);
+  return userData.name
 }
