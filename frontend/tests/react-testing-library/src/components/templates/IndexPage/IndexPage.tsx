@@ -6,15 +6,14 @@ import { useUser } from "@/services/Users/hooks/useData";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 
 export function IndexPage(): JSX.Element {
-  const user = useSelectorUser();
-  const { isLoading, error, data } = useUser(user);
-
+  const name = useSelectorUser();
+  const { isLoading, error, data } = useUser(name);
   return (
     <Stack width="100%">
       <Header />
       {isLoading && !error && <Box>Loading...</Box>}
       {error && <Box>Oops, an error has occurred.</Box>}
-      {!isLoading && data && user && !error && (
+      {!isLoading && data && name && !error && (
         <Stack gap="1rem">
           <DevBody
             name={data.name}
@@ -27,7 +26,7 @@ export function IndexPage(): JSX.Element {
             public_repos={data.public_repos}
           />
 
-          <Heading>Repositories:</Heading>
+          <Heading>Repositodries:</Heading>
 
           <DevRepositories />
         </Stack>

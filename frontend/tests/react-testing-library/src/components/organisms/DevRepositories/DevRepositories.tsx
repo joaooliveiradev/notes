@@ -12,9 +12,9 @@ export function DevRepositories(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { page, perPage } = useSelectorPage();
-  const user = useSelectorUser();
+  const name = useSelectorUser();
 
-  const { isLoading, error, data } = useRepositories(user, page, perPage);
+  const { isLoading, error, data } = useRepositories(name, page, perPage);
 
   function handleLoadMore() {
     const loadMoreCount = perPage + 6;

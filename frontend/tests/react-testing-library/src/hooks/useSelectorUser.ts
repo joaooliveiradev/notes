@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/lib/test-utils";
 
 type User = {
-  user: {
+  gitUser: {
     name: string;
     page: number;
     perPage: number;
@@ -9,6 +9,6 @@ type User = {
 };
 
 export function useSelectorUser() {
-  const userData = useAppSelector<User, User['user']>((state) => state.user);
-  return userData.name
+  const name = useAppSelector<User, string>((state) => state.gitUser.name);
+  return name
 }
