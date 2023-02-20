@@ -1,5 +1,4 @@
-import { useSelectorPage } from "@/hooks/useSelectorPage";
-import { useSelectorUser } from "@/hooks/useSelectorUser";
+import { useSelectorPage, useSelectorUser } from "@/hooks/";
 import { useRepositories } from "@/services/Users/hooks/useData";
 import { changePage, gitSlice } from "@/store/GitHubUser/gitUserSlice";
 import { screen, renderHook, waitFor } from "@testing-library/react";

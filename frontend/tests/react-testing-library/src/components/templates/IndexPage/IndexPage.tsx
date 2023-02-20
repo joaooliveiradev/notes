@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { DevBody, DevRepositories, Header } from "@/components/organisms";
-import { useSelectorUser } from "@/hooks/useSelectorUser";
+import { useSelectorUser } from "@/hooks/";
 import { useUser } from "@/services/Users/hooks/useData";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 

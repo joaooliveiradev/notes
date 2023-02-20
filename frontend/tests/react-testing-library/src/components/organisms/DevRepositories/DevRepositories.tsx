@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/destructuring-assignment */
 import { Repository } from "@/components/molecules";
-import { useSelectorPage } from "@/hooks/useSelectorPage";
-import { useSelectorUser } from "@/hooks/useSelectorUser";
+import { useSelectorPage, useSelectorUser } from "@/hooks/";
 import { useAppDispatch } from "@/lib/test-utils";
 import { useRepositories } from "@/services/Users/hooks/useData";
 import { changePage } from "@/store/GitHubUser/gitUserSlice";
