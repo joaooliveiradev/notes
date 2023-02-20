@@ -78,6 +78,7 @@ describe("<DevRepositories />", () => {
     });
   });
   it("should fail the useRepositores hook", async () => {
+    //to msw server listen requests and return 500 to fail the useRepositories hook
     server.listen();
 
     const { page, perPage } = useSelectorPage();
