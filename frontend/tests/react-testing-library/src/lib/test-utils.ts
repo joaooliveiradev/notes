@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { useDispatch, useSelector } from "react-redux";
 import store from "@/store/GitHubUser/store";
 import { rest } from "msw";
@@ -18,7 +17,3 @@ const handlers = [
 ];
 
 export const server = setupServer(...handlers);
-
-afterEach(() => server.resetHandlers());
-
-afterAll(() => server.close());

@@ -1,11 +1,11 @@
 module.exports = {
   extends: ["plugin:testing-library/react", "plugin:jest-dom/recommended"],
   plugins: ["testing-library", "jest-dom"],
-  "extends": [
+  extends: [
     "plugin:react/recommended",
     "plugin:jest/recommended",
     "airbnb",
-    "prettier"
+    "prettier",
   ],
   rules: {
     "testing-library/await-async-query": "error",

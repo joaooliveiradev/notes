@@ -6,7 +6,6 @@ import { screen, renderHook, waitFor } from "@testing-library/react";
 import { server, useAppDispatch } from "@/lib/test-utils";
 import { reactQueryWrapper, renderSetup } from "@/lib/testWrappers";
 import { setLogger } from "react-query";
-import { rest } from "msw";
 
 jest.mock("@/lib/test-utils", () => {
   const actualModule = jest.requireActual("@/lib/test-utils");
@@ -26,6 +25,10 @@ describe("<DevRepositories />", () => {
     })
   );
 
+  afterEach(() => server.resetHandlers());
+
+  afterAll(() => server.close());
+
   it("should be rendering", async () => {
     renderSetup();
     const gridElement = screen.getByTestId("repos");
@@ -43,9 +46,9 @@ describe("<DevRepositories />", () => {
     const spinner = screen.getByTestId("spinner");
 
     const { page, perPage } = useSelectorPage();
-    const user = useSelectorUser();
+    const name = useSelectorUser();
 
-    const { result } = renderHook(() => useRepositories(user, page, perPage), {
+    const { result } = renderHook(() => useRepositories(name, page, perPage), {
       wrapper: reactQueryWrapper,
     });
 
@@ -63,9 +66,9 @@ describe("<DevRepositories />", () => {
   it("success call useRepositories hook", async () => {
     const { page, perPage } = useSelectorPage();
 
-    const user = useSelectorUser();
+    const name = useSelectorUser();
 
-    const { result } = renderHook(() => useRepositories(user, page, perPage), {
+    const { result } = renderHook(() => useRepositories(name, page, perPage), {
       wrapper: reactQueryWrapper,
     });
 
@@ -79,9 +82,9 @@ describe("<DevRepositories />", () => {
 
     const { page, perPage } = useSelectorPage();
 
-    const user = useSelectorUser();
+    const name = useSelectorUser();
 
-    const { result } = renderHook(() => useRepositories(user, page, perPage), {
+    const { result } = renderHook(() => useRepositories(name, page, perPage), {
       wrapper: reactQueryWrapper,
     });
 
