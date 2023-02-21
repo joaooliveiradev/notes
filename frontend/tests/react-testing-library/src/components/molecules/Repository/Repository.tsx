@@ -18,7 +18,7 @@ export function Repository({
       onClick={() => window.open(htmlUrl)}
       data-testid="repositoryWrapper"
     >
-      <Text fontSize="xl" fontWeight="bold">
+      <Text fontSize="xl" fontWeight="bold"  data-testid="repositoryText">
         {name}
       </Text>
       <Badge fontSize="xs" colorScheme="blue">
