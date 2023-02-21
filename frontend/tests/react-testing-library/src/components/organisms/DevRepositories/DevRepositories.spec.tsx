@@ -1,10 +1,12 @@
 import { useSelectorPage, useSelectorUser } from "@/hooks/";
 import { useRepositories } from "@/services/Users/hooks/useData";
 import { changePage, gitSlice } from "@/store/GitHubUser/gitUserSlice";
-import { screen, renderHook, waitFor } from "@testing-library/react";
+import { screen, renderHook, waitFor, render } from "@testing-library/react";
 import { server, useAppDispatch } from "@/lib/test-utils";
-import { reactQueryWrapper, renderSetup } from "@/lib/testWrappers";
-import { setLogger } from "react-query";
+import { QueryClient, QueryClientProvider, setLogger } from "react-query";
+import { Provider } from "react-redux";
+import store from "@/store/GitHubUser/store";
+import { DevRepositories } from "./DevRepositories";
 
 jest.mock("@/lib/test-utils", () => {
   const actualModule = jest.requireActual("@/lib/test-utils");
@@ -14,6 +16,32 @@ jest.mock("@/lib/test-utils", () => {
     useAppSelector: () => gitSlice.getInitialState(),
   };
 });
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
+
+
+const reactQueryWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>{children}</Provider>
+    </QueryClientProvider>
+  );
+};
+
+const renderSetup = () =>
+  render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <DevRepositories />
+      </Provider>
+    </QueryClientProvider>
+);
 
 describe("<DevRepositories />", () => {
   beforeAll(() =>
