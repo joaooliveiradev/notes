@@ -93,11 +93,12 @@ describe("<DevRepositories />", () => {
       ? result.current.data.map((repo) => repo.name)
       : [];
 
-    const screenRepos = screen
-      .getAllByTestId("repositoryText")
-      .map((p) => p.textContent);
-
-    expect(resultRepos).toEqual(screenRepos);
+    await waitFor(() => {
+      const screenRepos = screen
+        .getAllByTestId("repositoryText")
+        .map((p) => p.textContent);
+      expect(resultRepos).toEqual(screenRepos);
+    });
   });
   it("should fail the useRepositores hook", async () => {
     // start msw server to intercept requests and return 500 to fail the useRepositories hook
