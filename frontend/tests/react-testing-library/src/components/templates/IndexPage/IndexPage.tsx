@@ -14,7 +14,7 @@ export function IndexPage(): JSX.Element {
       {isLoading && !error && <Box>Loading...</Box>}
       {error && <Box>Oops, an error has occurred.</Box>}
       {!isLoading && data && name && !error && (
-        <Stack gap="1rem">
+        <Stack data-testid="indexPageWrapper" gap="1rem">
           <DevBody
             name={data.name}
             login={data.login}
