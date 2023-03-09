@@ -14,8 +14,11 @@ Assuming that you already have Elixir and Erlang installed, you need to run thes
     mix do local.rebar --force, local.hex --force
     mix escript.install hex livebook
 
-    # Start the Livebook server
-    livebook server
+    # Start the Livebook server with the home flag set to the notebooks folder
+    livebook server --home ./notebooks
+
+    # This flag home is to set the a path to the env LIVEBOOK_HOME.
+    # Now in livebook, the default path when you open the import of markdown files will be the path setted.
 ```
 
 After the server starts, open the livebook in your browser and open of the markdowns of this project.
