@@ -1,0 +1,62 @@
+# Basics
+
+## Some types
+
+```elixir
+# Integer
+IO.puts(1)
+
+# Integer
+IO.puts(0x123)
+
+# Boolean
+IO.puts(2 + 3 === 5)
+
+# Float
+IO.puts(1.0)
+
+# Atom
+IO.puts(:name)
+
+# String
+IO.puts("String")
+
+# Lists
+IO.inspect([1, 2, 3])
+
+# Tuples
+IO.inspect({1, 2, 3})
+```
+
+## Puts vs Inspect
+
+In the previous example of basic types i used ```IO.puts``` and ```IO.Inspect```
+
+<br />
+
+The difference between these two options of printing it's the ```IO.puts``` just work for data types that implements ```String.Chars``` protocol, basically data types that can be used on ``` to_string/1``` function.
+
+Using IO.puts to printing tuples and list's will be not a good idea. If you want print using IO.puts anyway they should be convert to string first.
+
+```elixir
+IO.puts([1, 2, 3])
+```
+
+```IO.inspect``` basically work for every data type and plus have some options to us be able to prettify the output with some options.
+
+```elixir
+# Note: To see all the options check IO.Inspect docs at https://hexdocs.pm/elixir/Inspect.Opts.html
+# Note: Should use limit: infinity to able to print larger structures.
+IO.inspect([1, 2, 3], label: 'This list has these values', limit: 2)
+```
+
+Good additional reading about this [discussion](https://medium.com/@timotejfartek/when-to-use-elixirs-io-puts-and-when-io-inspect-6eb005d80d90).
+
+<br />
+
+TL;DR of this article:
+
+* IO.puts/2 for simple string messages where you are certain the input is parsable to a string
+* IO.inspect/2 for outputting any type of data. It can also be chained for maximum awesomeness
+* Combine inspect/2 and IO.puts/2 for better messages
+* Use the options limit: :infinity for printing very large structures and label: "your label" for labeling your output in IO.inspect/2
