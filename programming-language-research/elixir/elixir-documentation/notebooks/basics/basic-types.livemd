@@ -60,3 +60,75 @@ TL;DR of this article:
 * IO.inspect/2 for outputting any type of data. It can also be chained for maximum awesomeness
 * Combine inspect/2 and IO.puts/2 for better messages
 * Use the options limit: :infinity for printing very large structures and label: "your label" for labeling your output in IO.inspect/2
+
+## Arithmetics
+
+```elixir
+# Sum -> Integer
+# 3
+IO.puts(1 + 2)
+
+# Mult -> Integer
+# 10
+IO.puts(2 * 5)
+
+# Divider -> Float
+# Note: Using / to divide, always return a float
+# To divide and return a integer you can use div
+# 2.0
+IO.puts(10 / 5)
+
+# Divider -> Integer 
+# 2
+IO.puts(Kernel.div(10, 5))
+
+# Remainder -> Integer
+# 1
+IO.puts(Kernel.rem(10, 3))
+
+# Documentation Note: Notice that Elixir allows you to drop the parentheses when invoking 
+# named functions with at least one argument. this feature gives a cleaner syntax when writing
+# declarations and control-flow constructs. 
+# However, Elixir developers generally prefer to use parentheses
+
+# Elixir supports you to put Hexadecimal, Octal and binary numbers to Integer.
+# 16 
+IO.puts(0x10)
+# 8
+IO.puts(0o10)
+# 2
+IO.puts(0b10)
+
+# Float also supports (e) for scientific notation.
+IO.puts(1.0e10)
+```
+
+<b>
+Documentation Note:
+</b>
+
+<br />
+
+You can invoke the round function to get the closest integer to a given float, or the trunc function to get the integer part of a float.
+
+```elixir
+# Doc: Returns the integer part of number.
+# 3 
+IO.puts(Kernel.trunc(3.999999))
+
+# Doc: Rounds a number to the nearest integer
+# 3 
+IO.puts(Kernel.round(3.4999999))
+# 4
+IO.puts(Kernel.round(3.5))
+```
+
+## Identifying functions and documentation
+
+In Elixir, to identify function, we have their names ```Kernel.trunc``` and arity ```/1 -> One Argument, /2 -> Two Arguments, ...etc``` so with this, it's possible to understand the syntax ```Kernel.trunc/1```  or ```Kernel.trunc/2```. <br/>
+
+Note: The ``` Kernel.trunc/2``` it's just a example, it's doesn't exist in Elixir. <br>
+
+We also have in Elixir, a keyword or operator named ```h``` but this only works in the Interactive Elixir Shell using the iex on the terminal. <br>
+
+With the ```h``` we can use ``` h Kernel.trunc ``` and he will display a explanation about these function on the terminal with examples.
