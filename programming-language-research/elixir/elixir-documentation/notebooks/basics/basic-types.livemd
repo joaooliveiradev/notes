@@ -132,3 +132,39 @@ Note: The ``` Kernel.trunc/2``` it's just a example, it's doesn't exist in Elixi
 We also have in Elixir, a keyword or operator named ```h``` but this only works in the Interactive Elixir Shell using the iex on the terminal. <br>
 
 With the ```h``` we can use ``` h Kernel.trunc ``` and he will display a explanation about these function on the terminal with examples.
+
+We also can use the ```h``` to display module explanations and operators explanation.
+
+<b>
+Module example:
+</b>
+
+<b>
+Operator example:
+</b>
+
+## Booleans
+
+Elixir has some built in functions to work with booleans.
+
+```elixir
+# true
+IO.puts(is_boolean(false))
+# true
+IO.puts(is_boolean(true))
+
+# Some specific checks:
+# false
+IO.puts(is_atom('STR'))
+# false
+IO.puts(is_float(1))
+# false
+IO.puts(is_function(:function))
+# true
+IO.puts(is_integer(1))
+```
+
+There a lot of functions to specific checks, i will not put a all examples of them, normally if you type ```is_``` your code editor will auto complete all the functions that the Elixir provides. <br>
+
+This functions are commonly used in a lot of cases of course but a good case to use is when we are implementing [Guards](https://hexdocs.pm/elixir/guards.html).<br >
+It's a good research for the future, i will not annotate those things here because i think we need to go in baby steps for now.
